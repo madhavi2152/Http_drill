@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const htmlpath = "/home/madvi/Documents/http/htmlfile.html";
 const jsonf = "/home/madvi/Documents/http/stringt.json";
+const { v4: uuidv4 } = require("uuid");
 
 async function readf(htmlp) {
   return new Promise((res, rej) => {
@@ -31,6 +32,12 @@ server.get("/json", (req, res) => {
       res.end();
     })
     .catch((err) => console.log(err));
+});
+
+server.get("/uuid", (req, res) => {
+  const generatedUuid = uuidv4();
+  const response = { uuid: generatedUuid };
+  res.json(response);
 });
 
 let arr = [100, 200, 300, 400, 500];
